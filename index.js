@@ -8,6 +8,7 @@
 
   const ZONES = {
     topBanner: 5865232,
+    leftRail: 5865238,
     rightRail: 5865240,
     betweenMulti: 5867482
   };
@@ -164,6 +165,7 @@
     return {
       work: manifest.subids?.work ?? fallbackWork,
       top: manifest.subids?.top ?? fallbackWork + 10,
+      left: manifest.subids?.left ?? fallbackWork + 20,
       right: manifest.subids?.right ?? fallbackWork + 30,
       between: manifest.subids?.between ?? fallbackWork + 40
     };
@@ -241,30 +243,44 @@
     return wrap;
   }
 
-  function fillRightRail(subids) {
-    fillSlot(
-      document.getElementById("rightRailSlot1"),
-      ZONES.rightRail,
-      subids.right,
-      subids.work,
-      1
-    );
+  function fillRailStacks(subids) {
+    const leftSlots = [
+      "leftRailSlot1",
+      "leftRailSlot2",
+      "leftRailSlot3",
+      "leftRailSlot4",
+      "leftRailSlot5",
+      "leftRailSlot6"
+    ];
 
-    fillSlot(
-      document.getElementById("rightRailSlot2"),
-      ZONES.rightRail,
-      subids.right,
-      subids.work,
-      2
-    );
+    const rightSlots = [
+      "rightRailSlot1",
+      "rightRailSlot2",
+      "rightRailSlot3",
+      "rightRailSlot4",
+      "rightRailSlot5",
+      "rightRailSlot6"
+    ];
 
-    fillSlot(
-      document.getElementById("rightRailSlot3"),
-      ZONES.rightRail,
-      subids.right,
-      subids.work,
-      3
-    );
+    leftSlots.forEach((id, index) => {
+      fillSlot(
+        document.getElementById(id),
+        ZONES.leftRail,
+        subids.left,
+        subids.work,
+        index + 1
+      );
+    });
+
+    rightSlots.forEach((id, index) => {
+      fillSlot(
+        document.getElementById(id),
+        ZONES.rightRail,
+        subids.right,
+        subids.work,
+        index + 1
+      );
+    });
   }
 
   function renderWorksNav() {
@@ -372,9 +388,10 @@
 
     CURRENT_ITEM = manifest;
 
+    const title = `${resolved.work.display || titleCaseSlug(resolved.work.slug)} · ${manifest.subtitle || resolved.entry.subtitle || titleCaseSlug(resolved.entry.slug)}`;
     const workTitleEl = document.getElementById("workTitle");
     if (workTitleEl) {
-      workTitleEl.textContent = `${resolved.work.display || titleCaseSlug(resolved.work.slug)} · ${manifest.subtitle || resolved.entry.subtitle || titleCaseSlug(resolved.entry.slug)}`;
+      workTitleEl.textContent = title;
     }
 
     renderWorksNav();
@@ -389,13 +406,13 @@
       1
     );
 
-    fillRightRail(subids);
+    fillRailStacks(subids);
 
     reader.innerHTML = "";
 
     const note = document.createElement("div");
     note.className = "note";
-    note.textContent = "If anything below ever fails in the wider archive, keep scrolling. I planned for that. The working path is always here.";
+    note.textContent = "At most they simply have to scroll. And that’s easy.";
     reader.appendChild(note);
 
     const images = buildImageList(manifest);
