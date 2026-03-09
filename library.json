@@ -8,9 +8,10 @@
       "top_pill": true,
       "entries": [
         {
-          "slug": "book_1",
-          "type": "book",
-          "subtitle": "Book 1"
+          "slug": "chapter_1",
+          "path": "book_1/chapter_1",
+          "type": "chapter",
+          "subtitle": "Chapter 1"
         }
       ]
     }
