@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "works": [
+    {
+      "id": 101,
+      "slug": "barato",
+      "display": "Barato",
+      "top_pill": true,
+      "entries": [
+        {
+          "slug": "book_1",
+          "type": "book",
+          "subtitle": "Book 1"
+        }
+      ]
+    }
+  ]
+}
