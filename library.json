@@ -12,6 +12,12 @@
           "path": "book_1/chapter_1",
           "type": "chapter",
           "subtitle": "Chapter 1"
+        },
+        {
+          "slug": "chapter_2",
+          "path": "book_1/chapter_2",
+          "type": "chapter",
+          "subtitle": "Chapter 2"
         }
       ]
     }
